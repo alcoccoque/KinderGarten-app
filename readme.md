@@ -20,8 +20,9 @@ Based on kivy and sqlite
 | ID_KDG     | INTEGER | NOT_NULL                  |
 | ID_PARENTS | INTEGER | NOT_NULL                  |
 | FULL_NAME  | TEXT    | NOT NULL                  |
-|:--------------------:|
+####FOREIGN KEY
 |FOREIGN KEY(ID_PARENTS) REFERENCES Parents(ID_PARENTS) ON DELETE CASCADE ON UPDATE CASCADE|
+|--------------------|
 ###BooKeeping
 |         Name         | Type    | Keywords                                                |
 |:--------------------:|---------|---------------------------------------------------------|
@@ -30,8 +31,9 @@ Based on kivy and sqlite
 | numOfVisitDays       | INTEGER | NOT_NULL                                                |
 | monthlyPaymentResult | REAL    | GENERETED always as (1000 / 22 * numOfVisitDays) stored |
 | ID                   | INTEGER | NOT_NULL                                                |
-|:--------------------:|
+####FOREIGN KEY
 |FOREIGN KEY(ID) REFERENCES  personalAccount(ID) ON DELETE CASCADE ON UPDATE CASCADE|
+|--------------------|
 ###Admin
 |   Name   | Type | Keywords |
 |:--------:|------|----------|
