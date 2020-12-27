@@ -1,0 +1,368 @@
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import ShaderTransition kivy.uix.screenmanager.ShaderTransition
+#:import CardTransition kivy.uix.screenmanager.CardTransition
+<Login>:
+    transition: FadeTransition()
+    password:password
+    login_name:login_name
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/login.jpg'
+    RelativeLayout:
+        TextView:
+            pos_hint:{'y':.75,'center_x':.5}
+            text:'Login'
+            color:1,1,1,1
+            font_size:sp(30)
+        BoxLayout:
+            orientation:'vertical'
+            padding:dp(90),0,dp(90),0
+            spacing:dp(10)
+
+            size_hint_y:None
+            height:self.parent.height * .4
+
+            pos_hint:{'center_y':.5,'center_x':.5}
+            HBox:
+                TextView:
+                    text:'Name'
+                EditText:
+                    id:login_name
+                    hint_text:'Name'
+                    pos_hint:{'x': 0}
+                    border: 15,15,15,15
+            HBox:
+                TextView:
+                    text:'Password'
+                EditText:
+                    id:password
+                    password:True
+                    hint_text:'Password'
+                    border: 15,15,15,15
+            Btn:
+                text:'Login'
+                border: 15,15,15,15
+                on_release:root.login()
+
+
+<MainScreen>:
+    FloatLayout:
+        ActionBar:
+            pos_hint:{'top':1}
+            ActionView:
+                use_separator:True
+                padding: 30, 0, 30, 0
+                ActionPrevious:
+                    title:'KinderGarten'
+                ActionOverflow:
+
+                ActionButton:
+                    text:'Add'
+                    on_release:main_screen_manager.current = 'insert_kid'
+                ActionSeparator:
+
+                ActionButton:
+                    text:'Remove'
+                    on_release:main_screen_manager.current = 'remove_kid'
+                ActionSeparator:
+
+                ActionButton:
+                    text:'Bookkeeping'
+                    on_release:main_screen_manager.current = 'bookkeeping'
+                ActionSeparator:
+                ActionButton:
+                    text:'Change'
+                    on_release:main_screen_manager.current = 'change'
+                ActionSeparator:
+                ActionButton:
+                    text:'Logout'
+                    on_release:root.manager.current = 'login'
+    MainScreenManager:
+        id:main_screen_manager
+        transition:SlideTransition()
+        AddKid:
+            name:"insert_kid"
+        Bookkeeping:
+            name:"bookkeeping"
+        RemoveKid:
+            name:'remove_kid'
+        Change:
+            name: 'change'
+
+<AddKid>:
+    fullname:fullname
+    parentname:parentname
+    kgarten:kgarten
+    month:month
+
+    BoxLayout:
+        orientation:'vertical'
+        spacing:10
+        padding:dp(60),dp(100),dp(60),dp(0)
+        TextView:
+            text:'Add Kid'
+            halign:'center'
+            font_size:sp(25)
+        ScrollView:
+            scroll: False
+            GridLayout:
+                spacing:10
+                cols:1
+                size_hint_y:None
+                height:self.minimum_height
+
+                EditText:
+                    hint_text:'Surname, Name, Middle Name'
+                    id:fullname
+
+                EditText:
+                    hint_text:'Name one of the parents'
+                    id:parentname
+
+                EditText:
+                    hint_text:'Name of kinder garten'
+                    id:kgarten
+
+                EditText:
+                    hint_text:"Month"
+                    id:month
+
+                Btn:
+                    text:'Submit'
+                    font_size:sp(20)
+                    on_release:root.insert_kid()
+
+
+<SelectableButton>:
+    # Draw a background to indicate selection
+    canvas.before:
+        Color:
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Bookkeeping>:
+    BoxLayout:
+        orientation:'vertical'
+        spacing:10
+        padding:dp(30),dp(100),dp(30),dp(0)
+        orientation: "vertical"
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 12
+            Btn:
+                text:'1'
+                font_size:sp(20)
+                on_release:root.get_users(1)
+            Btn:
+                text:'2'
+                font_size:sp(20)
+                on_release:root.get_users(2)
+            Btn:
+                text:'3'
+                font_size:sp(20)
+                on_release:root.get_users(3)
+            Btn:
+                text:'4'
+                font_size:sp(20)
+                on_release:root.get_users(4)
+            Btn:
+                text:'5'
+                font_size:sp(20)
+                on_release:root.get_users(5)
+            Btn:
+                text:'6'
+                font_size:sp(20)
+                on_release:root.get_users(6)
+            Btn:
+                text:'7'
+                font_size:sp(20)
+                on_release:root.get_users(7)
+            Btn:
+                text:'8'
+                font_size:sp(20)
+                on_release:root.get_users(8)
+            Btn:
+                text:'9'
+                font_size:sp(20)
+                on_release:root.get_users(9)
+            Btn:
+                text:'10'
+                font_size:sp(20)
+                on_release:root.get_users(10)
+            Btn:
+                text:'11'
+                font_size:sp(20)
+                on_release:root.get_users(11)
+            Btn:
+                text:'12'
+                font_size:sp(20)
+                on_release:root.get_users(12)
+        TextView:
+            pos_hint:{'y':.75}
+            text:'BOOKKEPING'
+            font_size:sp(25)
+            color:1,1,1,1
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 4
+            Label:
+                text: "ID BOOKKEEPING"
+            Label:
+                text: "AMOUNT OF DAYS"
+            Label:
+                text: "MONTHLY PAYMENT"
+            Label:
+                text: "PERSONAL ACCOUNT ID"
+        BoxLayout:
+            RecycleView:
+                viewclass: 'SelectableButton'
+                data: [{'text': str(x)} for x in root.data_items_bk]
+                SelectableRecycleGridLayout:
+                    cols: 4
+                    default_size: None, dp(25)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    multiselect: False
+                    touch_multiselect: False
+        TextView:
+            pos_hint:{'y':.75}
+            text:'PERSONAL ACCOUNT'
+            font_size:sp(25)
+            color:1,1,1,1
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 4
+            cols_minimum: {0:10, 1:10, 2:10, 3:90}
+            Label:
+                text: "ID"
+            Label:
+                text: "ID KINDERGARTEN"
+            Label:
+                text: "ID PARENTS"
+            Label:
+                text: "FULLNAME"
+
+        BoxLayout:
+            RecycleView:
+                viewclass: 'SelectableButton'
+                data: [{'text': str(x)} for x in root.data_items_pa]
+                SelectableRecycleGridLayout:
+                    cols: 4
+                    cols_minimum: {0:10, 1:10, 2:10, 3:90}
+                    default_size: None, dp(25)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    multiselect: True
+                    touch_multiselect: True
+<Change>:
+    month:month
+    numOfVisitDays:numOfVisitDays
+    kid_id:kid_id
+    BoxLayout:
+        padding:dp(80),0,dp(80),0
+        spacing:10
+        orientation:'vertical'
+        size_hint_y:None
+        pos_hint:{'center_y':.5,'center_x':.5}
+        height:self.parent.height * .35
+        GridLayout:
+            spacing:10
+            cols:1
+            size_hint_y:None
+            EditText:
+                id:month
+                hint_text:'Month'
+            EditText:
+                id:numOfVisitDays
+                hint_text:'Days of visit'
+            EditText:
+                id:kid_id
+                hint_text:'Kid Id'
+            Btn:
+                text:'Submit'
+                font_size:sp(20)
+                on_release:root.change_numOfVisitDays()
+    TextView:
+        pos_hint:{'y':.75}
+        text:'Change Amount Of Days'
+        font_size:sp(25)
+        color:1,1,1,1
+<RemoveKid>:
+    kid_id:kid_id
+    BoxLayout:
+        padding:dp(80),0,dp(80),0
+        spacing:10
+        orientation:'vertical'
+        size_hint_y:None
+        pos_hint:{'center_y':.5,'center_x':.5}
+        height:self.parent.height * .35
+        GridLayout:
+            spacing:10
+            cols:1
+            size_hint_y:None
+            EditText:
+                id:kid_id
+                hint_text:'Kid Id'
+
+            Btn:
+                text:'Submit'
+                font_size:sp(20)
+                on_release:root.remove_kid()
+
+    TextView:
+        pos_hint:{'y':.75}
+        text:'Remove Kid'
+        font_size:sp(25)
+        color:1,1,1,1
+
+<Manager>:
+    transition:SlideTransition()
+    Login:
+        name:'login'
+    MainScreen:
+        name:'main_screen'
+
+<EditText@TextInput>:
+    multiline:False
+    size_hint_y:None
+    height:dp(40)
+    center_x:.5
+    halign:'center'
+<Btn@Button>:
+    size_hint_y:None
+    height:dp(40)
+<TextView@Label>:
+    size_hint_y:None
+    height:dp(40)
+    markup:True
+    font_size:sp(20)
+<HBox@BoxLayout>:
+    size_hint_y:None
+    height:dp(42)
+<ErrorPopup>:
+    size_hint:None,None
+    size:400,400
+    error:error
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            id:error
+        Button:
+            text:'Ok'
+            size_hint_y:None
+            height:dp(45)
+            on_release:root.dismiss()
