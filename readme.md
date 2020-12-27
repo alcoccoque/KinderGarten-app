@@ -6,7 +6,6 @@ Based on kivy and sqlite
 |:----------:|---------|---------------------------|
 | ID_PARENTS | INTEGER | PRIMARY KEY AUTOINCREMENT |
 | NAME       | TEXT    | NOT_NULL                  |
-|            |         |                           |
 ### KinderGarten
 |  Name  | Type    | Keywords                  |
 |:------:|---------|---------------------------|
@@ -40,5 +39,5 @@ Based on kivy and sqlite
 | name     | TEXT | TEXT     |
 | password | TEXT | NOT_NULL |
 ## Enter
-login:admin
-password: password
+### login:admin
+### password: password
